@@ -1,0 +1,89 @@
+#include <stdio.h>
+
+int main()
+{
+ int p,m,n,k=0,l=0,i,j,q;
+ scanf("%d",&p );
+ int a[p][p];
+ m=p,n=p;
+ int value =1;
+ int power = (((p*p)/11)+1)*2;
+ q=(((p*p)/11)+1)*2;
+ int b[power];
+ b[0]=0;
+ b[1]=0;
+ int t=2;
+ while(k<m && l<n)
+ {
+    for(i=l;i<n;i++)
+    {
+        if(value%11==0)
+        {
+            b[t]=k;
+            b[t+1]=i;
+            t=t+2;
+        }
+        a[k][i]=value;
+        value++;
+    }
+    k++;
+    for(i=k;i<m;i++)
+    {
+        if(value%11==0)
+        {
+            b[t]=i;
+            b[t+1]=n-1;
+            t=t+2;
+        }
+        a[i][n-1]=value;
+        value++;
+    }
+    n--;
+    if(k<m)
+    {
+        for(i=n-1;i>=l;i--)
+        {
+            if(value%11==0)
+            {
+                b[t]=m-1;
+                b[t+1]=i;
+                t=t+2;
+            }
+            a[m-1][i]=value;
+            value++;
+        }
+        m--;
+    }
+    if(l<n)
+    {
+        for(i=m-1;i>=k;i--)
+        {
+            if(value%11==0)
+            {
+                b[t]=i;
+                b[t+1]=l;
+                t=t+2;
+            }
+            a[i][l]=value;
+            value++;
+        }
+        l++;
+    }
+ }
+ for(i=0;i<p;i++)
+ {
+     for(j=0;j<p;j++)
+     {
+         printf("%d ",a[i][j]);
+     }
+     printf("\n");
+ }
+ printf("Total Power points:%d\n",(power/2));
+ i=0;
+ while(i<power)
+ {
+      printf("(%d,%d)",b[i],b[i+1]);
+     printf("\n");
+     i=i+2;
+ }
+}
